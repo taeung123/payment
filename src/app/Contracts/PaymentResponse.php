@@ -21,7 +21,13 @@ class PaymentResponse
 
         $payment_response = PaymentLog::create($data_response);
 
-        return redirect(config('payment.url_response'))->with('payment_response', $payment_response);
+        $repo_noti = config('payment.vnpay.vnp_ReturnUrl') . 'payment-response';
+
+        if (config('payment.url_response') !== '') {
+            $repo_noti = config('payment.url_response');
+        }
+
+        return redirect($repo_noti)->with('payment_response', $payment_response);
     }
 
     public function getCartId($data)

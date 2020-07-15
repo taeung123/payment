@@ -13,8 +13,8 @@ class PaymentAction
     }
 
     public function excute($request)
-        {
-        if (config('payment.url_response') == '' || config('payment.vnpay.vnp_ReturnUrl') == '') {
+    {
+        if (config('payment.vnpay.vnp_ReturnUrl') == '') {
             return redirect()->back()->with('alert', 'Chưa config !');
         }
 
@@ -22,7 +22,7 @@ class PaymentAction
         $payment_method = $this->repository->getEntity()->whereId($data['payment_method'])->first();
         if ($data['payment_method'] == 1) {
             $data = [
-                'cart_id' => $data['cart_id'],
+                'cart_id'  => $data['cart_id'],
                 'messages' => [
                     'status'        => true,
                     'notifications' => "Success",

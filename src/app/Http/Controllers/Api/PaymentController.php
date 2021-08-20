@@ -17,6 +17,15 @@ class PaymentController extends ApiController
         $this->entity      = $repository->getEntity();
 
         $this->transformer = PaymentMethodTransformer::class;
+        if (config('payment.auth_middleware.admin.middleware') !== '') {
+            $this->middleware(
+                config('payment.auth_middleware.admin.middleware'),
+                ['except' => config('payment.auth_middleware.admin.middleware.except')]
+            );
+        }
+        else{
+            throw new Exception("Admin middleware configuration is required");
+        }
     }
 
     public function __invoke(Request $request)

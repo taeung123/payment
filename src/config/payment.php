@@ -12,5 +12,11 @@ return [
         'vnp_HashSecret' => env('PAYMENT_COMPONENT_HASHSECRET', ''),
         'vnp_TmnCode'    => env('PAYMENT_COMPONENT_TMNCODE', ''),
     ],
+    'auth_middleware' => [
+        'admin'    => [
+            'middleware' => '',
+            'except'     => [],
+        ]
+    ],
 
 ];
